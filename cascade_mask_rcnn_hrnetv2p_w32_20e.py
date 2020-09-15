@@ -193,7 +193,7 @@ test_cfg = dict(
         mask_thr_binary=0.5))
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = '/content/drive/My Drive/Mmdetection/'
+data_root = '/content/drive/My Drive/colab_env/data/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -226,18 +226,18 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
-        ann_file='/content/drive/My Drive/chunk.json',
-        img_prefix='/content/drive/My Drive/chunk_images/',
+        ann_file=data_root + 'coco_1type_train.json',
+        img_prefix=data_root + 'images_1type_train/',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'VOC2007/test.json',
-        img_prefix=data_root + 'VOC2007/Test/',
+        ann_file=data_root + 'coco_1type_test.json',
+        img_prefix=data_root + 'images_1type_test',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'VOC2007/test.json',
-        img_prefix=data_root + 'VOC2007/Test/',
+        ann_file=data_root + 'coco_1type_test.json',
+        img_prefix=data_root + 'images_1type_test',
         pipeline=test_pipeline))
 # evaluation = dict(interval=1, metric=['bbox'])
 # optimizer
@@ -260,10 +260,10 @@ log_config = dict(
     ])
 # yapf:enable
 # runtime settings
-total_epochs = 36
+total_epochs = 44
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = '/content/drive/My Drive/Mmdetection/new_chunk_cascade_mask_rcnn_hrnetv2p_w32_20e'
+work_dir = '/content/drive/My Drive/colab_env'
 load_from = None
-resume_from = '/content/drive/My Drive/Mmdetection/new_chunk_cascade_mask_rcnn_hrnetv2p_w32_20e/epoch_30.pth'
+resume_from = '/content/drive/My Drive/colab_env/epoch_36.pth'
 workflow = [('train', 1)]
