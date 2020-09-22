@@ -193,7 +193,7 @@ test_cfg = dict(
         mask_thr_binary=0.5))
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = '/content/drive/My Drive/colab_env/data/'
+data_root = '/content/drive/My Drive/colab_env/tab_net_1C_all_types/data/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -226,18 +226,18 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
-        ann_file=data_root + 'coco_1type_train.json',
-        img_prefix=data_root + 'images_1type_train/',
+        ann_file=data_root + 'coco_train.json',
+        img_prefix=data_root + 'docs/',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
-        ann_file=data_root + 'coco_1type_test.json',
-        img_prefix=data_root + 'images_1type_test',
+        ann_file=data_root + 'coco_test.json',
+        img_prefix=data_root + 'docs/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
-        ann_file=data_root + 'coco_1type_test.json',
-        img_prefix=data_root + 'images_1type_test',
+        ann_file=data_root + 'coco_test.json',
+        img_prefix=data_root + 'docs/',
         pipeline=test_pipeline))
 # evaluation = dict(interval=1, metric=['bbox'])
 # optimizer
@@ -263,7 +263,7 @@ log_config = dict(
 total_epochs = 44
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = '/content/drive/My Drive/colab_env'
+work_dir = '/content/drive/My Drive/colab_env/tab_net_1C_all_types'
 load_from = None
-resume_from = '/content/drive/My Drive/colab_env/epoch_36.pth'
+resume_from = '/content/drive/My Drive/colab_env/tab_net_1C_all_types/epoch_36.pth'
 workflow = [('train', 1)]
