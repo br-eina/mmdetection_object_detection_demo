@@ -193,7 +193,8 @@ test_cfg = dict(
         mask_thr_binary=0.5))
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = '/content/drive/My Drive/colab_env/tab_net_1C_all_types/data/'
+data_root = '/content/drive/My Drive/colab_env/tab_net_finetuning/type_all/'
+img_data_root = '/content/drive/My Drive/colab_env/tab_net_finetuning/images/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -227,17 +228,17 @@ data = dict(
     train=dict(
         type=dataset_type,
         ann_file=data_root + 'coco_train.json',
-        img_prefix=data_root + 'docs/',
+        img_prefix=img_data_root,
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
         ann_file=data_root + 'coco_test.json',
-        img_prefix=data_root + 'docs/',
+        img_prefix=img_data_root,
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
         ann_file=data_root + 'coco_test.json',
-        img_prefix=data_root + 'docs/',
+        img_prefix=img_data_root,
         pipeline=test_pipeline))
 # evaluation = dict(interval=1, metric=['bbox'])
 # optimizer
@@ -253,7 +254,7 @@ lr_config = dict(
 checkpoint_config = dict(interval=1,create_symlink=False)
 # yapf:disable
 log_config = dict(
-    interval=50,
+    interval=20,
     hooks=[
         dict(type='TextLoggerHook'),
         # dict(type='TensorboardLoggerHook')
@@ -263,7 +264,7 @@ log_config = dict(
 total_epochs = 44
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = '/content/drive/My Drive/colab_env/tab_net_1C_all_types'
+work_dir = data_root + 'workdir'
 load_from = None
-resume_from = '/content/drive/My Drive/colab_env/tab_net_1C_all_types/epoch_36.pth'
+resume_from = '/content/drive/My Drive/colab_env/tab_net_finetuning/epoch_36_ICDAR19.pth'
 workflow = [('train', 1)]
